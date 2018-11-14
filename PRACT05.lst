@@ -1,0 +1,350 @@
+alu0101037653@cc2327:~$ ssh -p 2205 alu0101037653@exthost2.etsii.ull.es
+alu0101037653@exthost2.etsii.ull.es's password: 
+Welcome to Ubuntu 16.04.3 LTS (GNU/Linux 4.4.0-134-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+Last login: Thu Nov  8 12:04:59 2018 from 10.150.19.67
+alu0101037653@399c5e70c219:~$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Nov 14 13:07:11 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter password: 
+Last Successful login time: Wed Nov 07 2018 13:02:12 +00:00
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SQL> SPOOL PRACT05
+SQL> SQRT(POWER(2,5));
+SP2-0734: unknown command beginning "SQRT(POWER..." - rest of line ignored.
+SQL> SELECT SQRT(POWER(2,5))
+  2  FROM DUAL;
+
+SQRT(POWER(2,5))
+----------------
+      5.65685425
+
+SQL> SELECT LENGTH(A)
+  2  FROM ASIGNATURA
+  3  ;
+
+ LENGTH(A)
+----------
+	14
+	23
+	18
+	16
+	18
+	 7
+	 7
+	12
+	18
+	10
+	26
+
+ LENGTH(A)
+----------
+	17
+
+12 rows selected.
+
+SQL> SELECT SYSDATE - TO_DATE('29-APR-98')
+  2  FROM DUAL;
+
+SYSDATE-TO_DATE('29-APR-98')
+----------------------------
+		  7504.56343
+
+SQL> SELECT A
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  ;
+
+A
+--------------------------------------------------
+BASES DE DATOS
+INTELIGENCIA ARTIFICIAL
+ALMACENES DE DATOS
+MINERIA DE DATOS
+INFORMATICA BASICA
+ALGEBRA
+CALCULO
+OPTIMIZACION
+GESTION DE RIESGOS
+ASTRONOMIA
+ENSENANZA DE LA MATEMATICA
+
+A
+--------------------------------------------------
+ANALISIS COMPLEJO
+
+12 rows selected.
+
+SQL> SELECT TRUNC(SYSDATE - TO_DATE('29-APR-98'))
+  2  FROM DUAL;
+
+TRUNC(SYSDATE-TO_DATE('29-APR-98'))
+-----------------------------------
+			       7504
+
+SQL> SELECT SYSDATE - TO_DATE('29-APR-98 07:30', 'DD-MON-YY HH:MI')
+  2  FROM DUAL;
+
+SYSDATE-TO_DATE('29-APR-9807:30','DD-MON-YYHH:MI')
+--------------------------------------------------
+					-29020.745
+
+SQL> SELECT SYSDATE - TO_DATE('29-APR-1998 07:30', 'DD-MON-YYYY HH:MI')
+  2  FROM DUAL;
+
+SYSDATE-TO_DATE('29-APR-199807:30','DD-MON-YYYYHH:MI')
+------------------------------------------------------
+					    7504.25616
+
+SQL> SELECT A
+  2  FROM ASIGNATURA NATURAL JOIN AREA
+  3  WHERE AR LIKE 'A%';
+
+A
+--------------------------------------------------
+ALGEBRA
+ANALISIS COMPLEJO
+ASTRONOMIA
+
+SQL> SELECT A
+  2  FROM ASIGNATURA NATURAL JOIN AREA
+  3  WHERE AR LIKE '%A';
+
+A
+--------------------------------------------------
+ALGEBRA
+ASTRONOMIA
+ENSENANZA DE LA MATEMATICA
+OPTIMIZACION
+CALCULO
+
+SQL> SELECT A
+  2  FROM ASIGNATURA
+  3  WHERE A LIKE '%DATOS%'; 
+
+A
+--------------------------------------------------
+BASES DE DATOS
+ALMACENES DE DATOS
+MINERIA DE DATOS
+
+SQL> SELECT DNI
+  2  FROM PROFESOR
+  3  WHERE P LIKE '___R%'
+  4  ;
+
+       DNI
+----------
+      3333
+
+SQL> SELECT DNI
+  2  FROM PROFESOR
+  3  WHERE P LIKE '__R%'
+  4  ;
+
+       DNI
+----------
+      2222
+      4444
+      6666
+      7777
+
+SQL> SELECT DNI
+  2  FROM PROFESOR
+  3  WHERE P NOT LIKE '______%';
+
+       DNI
+----------
+      1111
+      3333
+      4444
+      5555
+      7777
+      1010
+
+6 rows selected.
+
+SQL> SELECT DISTINCT DNI
+  2  FROM PROFESOR
+  3  WHERE P LIKE '_____%';
+
+       DNI
+----------
+      2222
+      3333
+      4444
+      6666
+      7777
+      8888
+      9999
+      1010
+      2020
+      3030
+
+10 rows selected.
+
+SQL> SELECT P
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  WHERE FF IS NULL;
+
+P
+------------------------------------------------------------
+DAVID
+JUAN
+SOLEDAD
+CARLOS
+JOSE MANUEL
+PEDRO
+PEDRO
+MARIA
+MARIA
+IVAN
+MARIO
+
+P
+------------------------------------------------------------
+FRANCISCO
+ANGELA
+
+13 rows selected.
+
+SQL> SELECT DISTINCT P
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  WHERE FF IS NULL;
+
+P
+------------------------------------------------------------
+MARIO
+JUAN
+PEDRO
+FRANCISCO
+SOLEDAD
+DAVID
+CARLOS
+IVAN
+MARIA
+JOSE MANUEL
+ANGELA
+
+11 rows selected.
+
+SQL> SELECT DISTINCT P
+  2  FROM PLAN_DOCENTE NATURAL JOIN PROFESOR
+  3  WHERE CAS=8;
+
+P
+------------------------------------------------------------
+JUAN
+JOSE MANUEL
+
+SQL> COMMIT WORK
+  2  ;
+
+Commit complete.
+
+SQL> SPOOL OFF
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+alu0101037653@399c5e70c219:~$ git init
+Initialized empty Git repository in /home/siga01.stic.ull.es/fd/alu0101037653/.git/
+alu0101037653@399c5e70c219:~$ git add .
+alu0101037653@399c5e70c219:~$ git commit -m "pract05"
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'alu0101037653@399c5e70c219.(none)')
+alu0101037653@399c5e70c219:~$ git config --global user.email "alu0101037653@ull.edu.es"
+alu0101037653@399c5e70c219:~$ git config --global user.name "alu0101037653"
+alu0101037653@399c5e70c219:~$ git add .
+alu0101037653@399c5e70c219:~$ git commit -m "pract05"[master (root-commit) 9fb93ed] pract05
+ 54 files changed, 3186 insertions(+)
+ create mode 100644 .cache/motd.legal-displayed
+ create mode 100644 .gitconfig
+ create mode 100644 .sqlplus64_history
+ create mode 100644 DONT-SAVE-YOUR-FILES-IN-THIS-FOLDER-THEY-WILL-BE-DELETED
+ create mode 120000 Desktop
+ create mode 120000 Escritorio
+ create mode 100644 IMPORTANTE.TXT
+ create mode 100644 NO-GUARDE-SUS-ARCHIVOS-EN-ESTA-CARPETA-SERAN-BORRADOS
+ create mode 100644 PRACT05.lst
+ create mode 100644 README.txt
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/#practica1.c#
+ create mode 100755 datos/Disco_Duro_Virtual/private/Documentos/a.out
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/dibujo
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/ejer1.c~
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/ejer1_1.c
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/ejercicio1.c
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/ejercicio1.c~
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/pepito.odt
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica1.c
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica1.c~
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica2.c
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica2.c~
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica3.c
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica3.c~
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica4.c
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica5.c
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica5.c~
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica5/ejer1.c
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica5/ejer2.c
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica6.c~
+ create mode 100755 datos/Disco_Duro_Virtual/private/Documentos/practica6/a.out
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica6/ejer1.c
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica6/ejer1.c~
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica6/ejer1_1.c
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica6/ejer1_1.c~
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica6/ejer2.c
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica6/ejer2.c~
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica7/ejer1.c
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica7/ejer1.c~
+ create mode 100755 datos/Disco_Duro_Virtual/private/Documentos/practica8/a.out
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica8/ejer1.c
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica8/ejer1.c~
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica8_1/ejer20.c
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica8_1/ejer20_1.c
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica8_1/ejer20_1.c~
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica9/ejer1.c
+ create mode 100644 datos/Disco_Duro_Virtual/private/Documentos/practica9/ejer1.c~
+ create mode 100644 datos/Disco_Duro_Virtual/private/Escritorio/.directory
+ create mode 100644 datos/Disco_Duro_Virtual/private/perfilesesit/perfil-ubuntu14.04/README.txt
+ create mode 100644 datos/Disco_Duro_Virtual/private/perfilesesit/perfil-ubuntu14.04/ficheros-perfil-local
+ create mode 100644 datos/Disco_Duro_Virtual/private/perfilesesit/perfil-ubuntu16.04/README.txt
+ create mode 100644 datos/Disco_Duro_Virtual/private/perfilesesit/perfil-ubuntu16.04/ficheros-perfil-local
+ create mode 100644 ficheros-perfil-local
+ create mode 100644 files-in-this-directory-at-login-time.txt
+alu0101037653@399c5e70c219:~$ git remote add origin git@github.com:alu0101037653/BBDD05.git
+alu0101037653@399c5e70c219:~$ git push -u origin master
+The authenticity of host 'github.com (140.82.118.3)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'github.com,140.82.118.3' (RSA) to the list of known hosts.
+Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+alu0101037653@399c5e70c219:~$ 
